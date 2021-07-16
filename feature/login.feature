@@ -5,35 +5,32 @@ Feature: Test the login functionality
 
   
   Scenario: Using valid credenitals I should be able to login
-    Given I open the Browser
-    And I visit the application
-    And I enter valid username
-    And I enter valid password
-    When I click the login button
+    Given I open my chrome browser
+     And I visit my application
+    And I enter "test.user@gmail.com.test" as username and "Welcome2" as password
+    When I click login button
     Then I should see the dashboard
-    And check more outcomes
-
+Then i should close the browser
 
   Scenario: Using in-valid credenitals I should be able to login
-    Given I open the Browser
-    And I visit the application
-    And I enter invalid username
-    And I enter invalid password
-    When I click the login button
-    And I should see the error
+Given I open my chrome browser
+     And I visit my application
+    And I enter "test.user@gmail.com.test" as username and "Welcome2" as password
+    When I click login button
+    Then I should see an error message
+    Then i should close the browser
     
     Scenario: Using in-valid credenitals I should be able to login two
-    Given I open the Browser
-    And I visit the application
-    And I enter invalid username
-    And I enter invalid password
-    When I click the login button
-    And I should see the error
-    
+    Given I open my chrome browser
+     And I visit my application
+    And I enter "test.user@gmail.com.test" as username and "Welcome2" as password
+    When I click login button
+    Then I should see an error message
+    Then i should close the browser
     Scenario: Using in-valid credenitals I should be able to login three
-    Given I open the Browser
-    And I visit the application
-    And I enter invalid username
-    And I enter invalid password
-    When I click the login button
-    And I should see the error
+    Given I open my chrome browser
+     And I visit my application
+    And I enter "test.user@gmail.com.test" as username and "Welcome2" as password
+    When I click login button
+    Then I should see an error message
+    Then i should close the browser
