@@ -7,6 +7,7 @@ import cucumber.api.junit.Cucumber;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
+		dryRun= false,
 		features=".", // "." represents the root directory (we were using feature before)
 		glue="stepDefinition",
 		monochrome=true,

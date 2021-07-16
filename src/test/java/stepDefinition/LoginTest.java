@@ -1,64 +1,90 @@
 package stepDefinition;
 
-import org.junit.Assert;
+import java.util.concurrent.TimeUnit;
 
+import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import cucumber.api.java.After;
+import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import utilities.BaseClass;
 
+public class LoginTest extends BaseClass{
 
-public class LoginTest {
-	@Given("^I open the Browser$")
-	public void i_open_the_Browser()  {
-	    System.out.println("I open the browser");
+		@Before(value="@accounts",order=0)                   //({"@accounts"}) hook with accounts tag means this scenario only applies to accounts
+		public void openBrowser() {
+			System.setProperty("webdriver.chrome.driver", "C:\\\\Users\\\\Dania\\\\OneDrive\\\\Desktop\\\\Selenium files\\\\chromedriver\\\\chromedriver.exe");
+			 driver= new ChromeDriver();
+			 driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		}
+	
+	
+		@After(value="@accounts",order=0) 
+		public void closeBrowser() {
+			driver.close();
+		}
+		@Before(value="@accounts",order=1)                   //({"@accounts"}) hook with accounts tag means this scenario only applies to accounts
+		public void validateopenBrowser() {
+			System.out.println("Openbrowser method executed");
+		}
+		@After(value="@accounts",order=1) 
+		public void verifycloseBrowser() {
+			System.out.println("closeBrowser method executed");
+		}
+		
+	@Given("^I open my chrome browser$")
+	public void I_open_my_chrome_browser() {
+	System.setProperty("webdriver.chrome.driver", "C:\\\\Users\\\\Dania\\\\OneDrive\\\\Desktop\\\\Selenium files\\\\chromedriver\\\\chromedriver.exe");
+	 driver= new ChromeDriver();
+	 driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 
-	@Given("^I visit the application$")
-	public void i_visit_the_application() {
-		 System.out.println("I visit the application");
+	@Given("^I visit my application$")
+	public void I_visit_my_application()  {
+		driver.get("https://login.salesforce.com");
 	}
 
-	@Given("^I enter valid username$")
-	public void i_enter_valid_username() {
-		 System.out.println("I enter valid username");
-	}
+@Given("^I enter \"([^\"]*)\" as username and \"([^\"]*)\" as password$")
+public void I_enter_as_username_and_as_password(String arg1, String arg2) {
+    driver.findElement(By.id("username")).sendKeys(arg1);
+    driver.findElement(By.id("password")).sendKeys(arg2);
+}
+	
 
-	@Given("^I enter valid password$")
-	public void i_enter_valid_password() {
-		 System.out.println("I enter valid password");
-	}
-
-	@When("^I click the login button$")
-	public void i_click_the_login_button() {
-		 System.out.println("I click the login button");
+	@When("^I click login button$")
+	public void I_click_login_button()  {
+		driver.findElement(By.id("Login")).click();
 	}
 
 	@Then("^I should see the dashboard$")
-	public void i_should_see_the_dashboard()  {
-		 System.out.println("I should see the dashboard");
+	public void I_should_see_the_dashboard() {
+		boolean homePage = driver.findElement(By.xpath("//a[@title='Home Tab - Selected']")).isDisplayed();
+	Assert.assertTrue(homePage);
+	}
+	@Given("^I enter \"([^\"]*)\" as username$")
+	public void I_enter_as_username(String arg1) {
+		  driver.findElement(By.id("username")).sendKeys(arg1);
 	}
 
-	@Then("^check more outcomes$")
-	public void check_more_outcomes()  {
-		 System.out.println("I check more outcomes");
+	@Given("^I enter \"([^\"]*)\" as password$")
+	public void I_enter_as_password(String arg1) {
+		driver.findElement(By.id("password")).sendKeys(arg1);
 	}
 
-@Given("^I enter invalid username$")
-public void i_enter_invalid_username()  {
-   System.out.println("I enter invalid username");
+	@Then("^I should see an error message$")
+	public void I_should_see_an_error_message()  {
+		String expectedMessage="Please check your username and password. If you still can't log in, contact your Salesforce administrator.";   
+		String actualmessage = driver.findElement(By.id("error")).getText();
+		Assert.assertEquals(expectedMessage, actualmessage);
+	}
 
-}
-
-@Given("^I enter invalid password$")
-public void i_enter_invalid_password() {
-Assert.assertTrue(true);
-
-}
-
-@When("^I should see the error$")
-public void i_should_see_the_error()  {
-  System.out.println("I should see the error");
-}
-
-
+	@Then("^I should close the browser$")
+	public void I_should_close_the_browser() {
+		driver.close();
+	}
 }
