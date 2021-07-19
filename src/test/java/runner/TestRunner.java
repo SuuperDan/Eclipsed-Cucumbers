@@ -14,8 +14,8 @@ import cucumber.api.junit.Cucumber;
 		dryRun=false,
 		plugin= {
 				"html:target/cucumber-reports/cucumber-html",
-				"json:target/cucumber-reports/cucumber.json",
-				"rerun:rerun/failed_scenario.txt"   // here we create a rerun file inside rerun folder 
+				"json:target/cucumber-reports/cucumber.json"
+				
 		}
 		)
 public class TestRunner {
