@@ -4,7 +4,6 @@ import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import cucumber.api.java.After;
@@ -83,8 +82,9 @@ public void I_enter_as_username_and_as_password(String arg1, String arg2) {
 		Assert.assertEquals(expectedMessage, actualmessage);
 	}
 
-	@Then("^I should close the browser$")
-	public void I_should_close_the_browser() {
+	
+	@Then("^i should close the browser$")
+	public void i_should_close_the_browser()  {
 		driver.close();
 	}
 }

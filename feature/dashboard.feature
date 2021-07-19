@@ -11,4 +11,4 @@ Feature: Verify links on the dashboard
     And I should see the Accounts Link
     And I should see the Home Link
     And I should see the Opportunity Link
-    Then I should close the browser
+    Then i should close the browser
